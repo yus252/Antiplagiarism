@@ -1,0 +1,77 @@
+/* File Header & Class Header */ 
+// TODO Make sure to have proper style. 
+
+import java.io.*;
+import java.util.*;
+
+public class WordCountListTester {
+
+    /** Methods: */
+
+    /* main method
+        NOTE: If you plan on throw Exceptions, you need to change "IOException" to "Exception"
+        IOExceptions are a specific set of Exceptions.
+        */
+    public static void main(String[] args) throws IOException {
+        WordCountListTester wct = new WordCountListTester();
+
+
+        //This tester uses the command line. That's why the args are passed to the method
+
+        wct.providedTester(args);
+
+
+        /** TODO: Add other unit test method calls here */
+        
+        /** Tester for A-1 */
+        //create a new wordcountlist object
+        WordCountList wclist = new WordCountList();
+        //load file 
+        String file = "tester.txt";
+        //test method
+        wclist.getWordsFromFile(file);
+        /** Tester for C-1 */
+        
+        
+
+
+    } // End Main Method
+
+
+      
+    /** Write more unit tests above this provided tester */ 
+    public static void providedTester(String[] args) throws IOException {
+
+        if (args.length == 0) {
+            System.out.println("Skipping provided tester because no arguments were given!");
+            return;
+        }
+        
+        // Command line usage:
+        // java WordCloudTester nameOfInputFile.txt numberOfTopNWords {console|file} {length|char} {value}
+
+        // init the word clound
+        WordCountList w = new WordCountList();
+        System.out.println("Reading in File: " + args[0]);
+        w.getWordsFromFile(args[0]);
+
+        System.out.println("Removing common words");
+        w.removeCommon("inputFiles_DoNotSubmit/commonWords.txt");
+
+        // get the input number of words you want
+        int numberOfTopNWords = Integer.parseInt(args[1]);
+        
+        // condition ? a : b => if (condition == true) then a else b
+        // parse the second argument to check if it is printToFile or not
+        boolean printToFile = args[2].charAt(0) == 'f' ? true : false;
+        // parse the third argument to check if it is filter by lengh or not
+        
+        System.out.println("Printing the top " + numberOfTopNWords + " words " + (printToFile == true ?
+                " in file a named myOutput.out" : " on console"));
+        
+        
+        WordCountList w2 = new WordCountList(w.topNWords(numberOfTopNWords));
+        w2.outputWords(printToFile);
+
+    }
+}

@@ -1,0 +1,116 @@
+import java.util.*;
+import java.io.*;
+
+public class WordCountList {
+
+  // The ArrayList to store the words and their associated counts
+  ArrayList<WordCount> list;
+ 
+  // construct the list
+  public WordCountList() {
+    list = new ArrayList<WordCount>();
+  }
+
+  public WordCountList(ArrayList<WordCount> list) {
+      this.list = list;
+  }
+
+  // This method will read all the words from the source file and properly
+  // update the list
+  public void getWordsFromFile( String filename ) throws IOException {
+  //Create a scanner to read the file
+  Scanner scanner = new Scanner(new File(filename));
+  //Create an array to contain words in the file
+  ArrayList<WordCount> wordList = new  ArrayList<>();
+  //add the first word to the arraylist
+  if(scanner.hasNext()){
+     String word = scanner.next();
+     WordCount newWord = new WordCount(word);
+     wordList.add(newWord);
+  }
+  //caculate the word count
+  while( scanner.hasNext()){
+     String word = scanner.next();
+     //set the word to low case for comparing 
+     word = word.toLowerCase();
+     int i = 0;
+     while( i < wordList.size()){
+        WordCount wordCount = wordList.get(i);
+        String wordInList = wordCount.getWord();
+        wordInList = wordInList.toLowerCase();
+        if( !word.equals(wordInList)){
+           //add the word to the arraylist if it does not exist
+           WordCount newWord = new WordCount(word);
+           wordList.add(newWord);
+        }else{
+           //increase the word's count if it exists
+          wordCount.increment();
+        }
+     }
+   }
+  scanner.close();
+  this.list = wordList;
+  }
+
+
+  // An accessor method for the tester file 
+  public ArrayList<WordCount> getList(){
+    return list;
+  }
+  
+  // This method will remove any commonly used words from
+  // the list. 
+  public void removeCommon( String omitFilename ) throws IOException {
+     this.getWordsFromFile(omitFilename);
+     //load the common words file
+     Scanner scanner = new Scanner(new File("commonWords.txt"));
+     while(scanner.hasNext()){
+        String commonWord = scanner.next();
+        int i = 0;
+        while( i < this.list.size()){
+           WordCount wordCount = this.list.get(i);
+           if(commonWord.equals(wordCount.getWord())){
+              this.list.remove(wordCount);
+              }else{
+              i++;
+              }
+        }
+     }
+  }
+             
+     
+         
+   
+  
+
+  // This method finds the top n occurring words in the
+  // list with lengths>= length and returns it as an ArrayList.  In the event
+  // of a tie, use the first occurring
+  // word with that count.
+  public ArrayList<WordCount> topNWords(int n) {
+    // Complete this method  TODO    
+    
+    return null;
+  }
+
+  // This method takes the WordCounts and outputs the words and their
+  // counts as a String.
+  public String toString() {
+    for( int i = 0; i < this.list.size(); i++){
+       WordCount word = this.list.get(i);
+       System.out.println(word.getWord()+"("+word.getCount()+")"+" ");
+    }
+    return null;
+  }
+  
+  //This method takes in an ArrayList of WordCounts and a boolean
+  //printToFile. If printToFile is true, it should output the 
+  //arraylist of wordpair with their counts to a file named 
+  //myOutput.out . If printToFile is false, it should print the 
+  //arraylist of wordpair with their counts on the console
+  public void outputWords(boolean printToFile) throws IOException{
+    // Complete this method TODO
+  }
+
+  
+}
