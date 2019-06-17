@@ -1,15 +1,14 @@
 To use WordCountListTester, run a line like:
 java WordCountListTester nameOfInputFile.txt numberOfTopNWords {file|console} 
-EX:> java WordCountListTester inputFiles_DoNotSubmit/harry_potter.txt 10 console
+EX:
+> java WordCountListTester inputFiles_DoNotSubmit/harry_potter.txt 10 console
 > java WordCountListTester inputFiles_DoNotSubmit/harry_potter.txt 10 file
 Similarity Checker :
 java Similarity odyssey_shortened.txt odyssey_original.txt
 
 
 About WordCountList:
-I have learned some information about this program from the discussion. However,
-when I approached this program by myself, I found that it is much more
-difficult. First, the program read the every word in the file that I choose. At
+First, the program read the every word in the file that I choose. At
 the same time, I need to check whether the file has next word or not. If it does
 not have more word, then stop reading. Second, I add the first word to an array.
 You can think of it as a line of boxes. You can store some stuff or some objects
